@@ -147,10 +147,10 @@ network_check() {
 
 # Check IPv4 connectivity
   if ping -c 1 -W 1 10.137.0.252 &>/dev/null; then 
-    msg_ok "IPv4 Internet Connected";
+    msg_ok "IPv4 Internet Connected -- lolowood";
     ipv4_connected=true
   else
-    msg_error "IPv4 Internet Not Connected";
+    msg_error "IPv4 Internet Not Connected -- lolowood";
   fi
 
 # Check IPv6 connectivity
