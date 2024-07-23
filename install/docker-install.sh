@@ -42,6 +42,7 @@ cat <<EOF >/etc/docker/daemon.json
   "log-driver": "journald"
 }
 EOF
+systemctl restart docker
 $STD sh <(curl -sSL https://get.docker.com)
 msg_ok "Installed Docker $DOCKER_LATEST_VERSION"
 
