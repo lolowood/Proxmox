@@ -40,7 +40,6 @@ cat <<EOF >/etc/docker/daemon.json
     "https-proxy": "https://rie-proxy.justice.gouv.fr:8080",
     "no-proxy": "127.0.0.1,localhost,*.ac*.justice.fr;*.ac.justice.fr;*.ader.gouv.fr;*.ader.senat.fr;*.amalfi.fr,127.0.0.0/8,10.0.0.0/8"
   }
-  "log-driver": "journald"
 }
 EOF
 systemctl stop docker
