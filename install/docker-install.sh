@@ -66,6 +66,7 @@ if [[ ${prompt,,} =~ ^(y|yes)$ ]]; then
     --name=portainer \
     --restart=always \
     --env HTTP_PROXY="http://rie-proxy.justice.gouv.fr:8080" \
+    --dns=10.137.10.145
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v portainer_data:/data \
     portainer/portainer-ce:latest
