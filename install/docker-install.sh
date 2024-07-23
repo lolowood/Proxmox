@@ -13,7 +13,7 @@ setting_up_container
 network_check
 update_os
 
-msg_info "Installing Dependencies -- lolowood"
+msg_info "Installing Dependencies"
 $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
@@ -32,6 +32,7 @@ msg_info "Installing Docker $DOCKER_LATEST_VERSION"
 DOCKER_CONFIG_PATH='/etc/docker/daemon.json'
 mkdir -p $(dirname $DOCKER_CONFIG_PATH)
 #echo -e '{\n  "log-driver": "journald"\n}' >/etc/docker/daemon.json
+$STD sh <(curl -sSL https://get.docker.com)
 cat <<EOF >/etc/docker/daemon.json
 {
   "proxies": {
@@ -43,7 +44,6 @@ cat <<EOF >/etc/docker/daemon.json
 }
 EOF
 systemctl restart docker
-$STD sh <(curl -sSL https://get.docker.com)
 msg_ok "Installed Docker $DOCKER_LATEST_VERSION"
 
 read -r -p "Would you like to add Portainer? <y/N> " prompt
