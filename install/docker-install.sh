@@ -43,7 +43,8 @@ cat <<EOF >/etc/docker/daemon.json
   "log-driver": "journald"
 }
 EOF
-#systemctl restart docker
+systemctl stop docker
+systemctl start docker
 msg_ok "Installed Docker $DOCKER_LATEST_VERSION"
 
 read -r -p "Would you like to add Portainer? <y/N> " prompt
