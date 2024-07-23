@@ -31,7 +31,17 @@ DOCKER_COMPOSE_LATEST_VERSION=$(get_latest_release "docker/compose")
 msg_info "Installing Docker $DOCKER_LATEST_VERSION"
 DOCKER_CONFIG_PATH='/etc/docker/daemon.json'
 mkdir -p $(dirname $DOCKER_CONFIG_PATH)
-echo -e '{\n  "log-driver": "journald"\n}' >/etc/docker/daemon.json
+#echo -e '{\n  "log-driver": "journald"\n}' >/etc/docker/daemon.json
+cat <<EOF >/etc/docker/daemon.json
+{
+  "proxies": {
+    "http-proxy": "http://proxy.example.com:3128",
+    "https-proxy": "https://proxy.example.com:3129",
+    "no-proxy": "*.test.example.com,.example.org,127.0.0.0/8"
+  }
+  "log-driver": "journald"
+}
+EOF
 $STD sh <(curl -sSL https://get.docker.com)
 msg_ok "Installed Docker $DOCKER_LATEST_VERSION"
 
