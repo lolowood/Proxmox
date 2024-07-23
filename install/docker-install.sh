@@ -37,7 +37,7 @@ cat <<EOF >/etc/docker/daemon.json
 {
   "proxies": {
     "http-proxy": "http://rie-proxy.justice.gouv.fr:8080",
-    "https-proxy": "https://rie-proxy.justice.gouv.fr:8080",
+    "https-proxy": "http://rie-proxy.justice.gouv.fr:8080",
     "no-proxy": "127.0.0.1,localhost,*.ac*.justice.fr;*.ac.justice.fr;*.ader.gouv.fr;*.ader.senat.fr;*.amalfi.fr,127.0.0.0/8,10.0.0.0/8"
   }
 }
@@ -65,8 +65,6 @@ if [[ ${prompt,,} =~ ^(y|yes)$ ]]; then
     -p 9443:9443 \
     --name=portainer \
     --restart=always \
-    --env HTTP_PROXY="http://rie-proxy.justice.gouv.fr:8080" \
-    --dns=10.137.10.145 \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v portainer_data:/data \
     portainer/portainer-ce:latest
