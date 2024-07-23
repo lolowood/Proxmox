@@ -44,6 +44,16 @@ cat <<EOF >/etc/docker/daemon.json
 EOF
 systemctl stop docker
 systemctl start docker
+mkdir -p /etc/systemd/system/docker.service.d
+cat <<EOF >/etc/systemd/system/docker.service.d/http-proxy.conf
+[Service]
+Environment="HTTP_PROXY=http://rie-proxy.justice.gouv.fr:8080"
+Environment="HTTPS_PROXY=http://rie-proxy.justice.gouv.fr:8080"
+Environment="NO_PROXY=127.0.0.1,localhost,*.ac*.justice.fr;*.ac.justice.fr;*.ader.gouv.fr;*.ader.senat.fr;*.amalfi.fr,127.0.0.0/8,10.0.0.0/8localhost,127.0.0.1,docker-registry.example.com,.corp"
+EOF
+systemctl daemon-reload
+systemctl stop docker
+systemctl start docker
 msg_ok "Installed Docker $DOCKER_LATEST_VERSION"
 
 read -r -p "Would you like to add Portainer? <y/N> " prompt
@@ -55,6 +65,7 @@ if [[ ${prompt,,} =~ ^(y|yes)$ ]]; then
     -p 9443:9443 \
     --name=portainer \
     --restart=always \
+    --env HTTP_PROXY="http://rie-proxy.justice.gouv.fr:8080"
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v portainer_data:/data \
     portainer/portainer-ce:latest
