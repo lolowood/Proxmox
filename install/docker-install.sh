@@ -36,9 +36,9 @@ $STD sh <(curl -sSL https://get.docker.com)
 cat <<EOF >/etc/docker/daemon.json
 {
   "proxies": {
-    "http-proxy": "http://proxy.example.com:3128",
-    "https-proxy": "https://proxy.example.com:3129",
-    "no-proxy": "*.test.example.com,.example.org,127.0.0.0/8"
+    "http-proxy": "http://rie-proxy.justice.gouv.fr:8080",
+    "https-proxy": "https://rie-proxy.justice.gouv.fr:8080",
+    "no-proxy": "127.0.0.1,localhost,*.ac*.justice.fr;*.ac.justice.fr;*.ader.gouv.fr;*.ader.senat.fr;*.amalfi.fr,127.0.0.0/8,10.0.0.0/8"
   }
   "log-driver": "journald"
 }
