@@ -112,6 +112,7 @@ https_proxy= http://rie-proxy.justice.gouv.fr:8080/
 ftp_proxy= http://rie-proxy.justice.gouv.fr:8080/
 EOF
 bash /etc/profile.d/proxy.sh
+apt-get update
   sed -i "/$LANG/ s/\(^# \)//" /etc/locale.gen
   locale_line=$(grep -v '^#' /etc/locale.gen | grep -E '^[a-zA-Z]' | awk '{print $1}' | head -n 1)
   echo "LANG=${locale_line}" >/etc/default/locale
