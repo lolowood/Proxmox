@@ -19,9 +19,9 @@ EOF
 header_info
 echo -e "Loading..."
 APP="Docker"
-var_disk="4"
-var_cpu="2"
-var_ram="2048"
+var_disk="8"
+var_cpu="4
+var_ram="4096"
 var_os="debian"
 var_version="12"
 variables
@@ -37,18 +37,18 @@ function default_settings() {
   CORE_COUNT="$var_cpu"
   RAM_SIZE="$var_ram"
   BRG="vmbr0"
-  NET="dhcp"
-  GATE=""
+  NET="10.137.0.195/24"
+  GATE="10.137.0.252"
   APT_CACHER=""
   APT_CACHER_IP=""
-  DISABLEIP6="no"
+  DISABLEIP6="yes"
   MTU=""
   SD=""
-  NS=""
+  NS="10.137.10.145"
   MAC=""
   VLAN=""
-  SSH="no"
-  VERB="no"
+  SSH="yes"
+  VERB="yes"
   echo_default
 }
 
