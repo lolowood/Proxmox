@@ -166,6 +166,31 @@ fi
 EOF
   chmod +x /usr/local/bin/apt-proxy-detect.sh
   fi
+cat <<EOF >/etc/apt/apt.conf.d/76pveproxy
+Acquire::http::Proxy "http://rie-proxy.justice.gouv.fr:8080/";
+EOF
+
+cat <<EOF >/etc/profile.d/proxy.sh 
+# set proxy config via profie.d - should apply for all users
+# http/https/ftp/no_proxy
+export http_proxy="http://rie-proxy.justice.gouv.fr:8080/"
+export https_proxy="http://rie-proxy.justice.gouv.fr:8080/"
+export ftp_proxy="http://rie-proxy.justice.gouv.fr:8080/"
+export no_proxy="127.0.0.1,localhost,*.ac*.justice.fr;*.ac.justice.fr;*.ader.gouv.fr;*.ader.senat.fr;*.amalfi.fr;*.babylon.justice.gouv.fr;*.ca-*.justice.fr;*.cour-de-cassation.justice.fr;*.dom*.justice.fr;*.drsp*.justice.fr;*.ij.justice.gouv.fr;*.intranet-cassation.justice.fr;*.intranet.justice.fr;*.intranet.justice.gouv.fr;*.mj.fr;*.registre.justice.fr;*.rie.gouv.fr;*.symcb.com;*.testa.eu;*.thawte.com;10.*;100.65.80.3;127.0.0.1;140.*;150.*;aone-enm-bdx.enm.justice.fr;atlas.justice.gouv.fr;autodiscover.*.fr;babylon.justice.gouv.fr;cour-de-cassation.justice.fr;csm-lodam-preprod.sdv.fr;epahisto.enm.justice.fr;epaprod.enm.justice.fr;fraisdemission.enm.justice.fr;gbprod.enm.justice.fr;gbtest.enm.justice.fr;gedapc-enm.enm.justice.fr;glpi.enm.justice.fr;helpdesk-enm.enm.justice.fr;iisadmpwd.enm.justice.fr;intranet-prod.conseil-superieur-magistrature.fr;intranet.conseil-superieur-magistrature.fr;intranet.justice.gouv.fr;livretpedagogique.enm.justice.fr;localhost;lodam.conseil-superieur-magistrature.fr;nomade-mj.sfr-sh.fr;ocsp.thawte.com;openportal.enm.justice.fr;portail-ofl.enm.justice.fr;svr-ov-crl.thawte.com;virtualia-enm.enm.justice.fr;vubis-enm.enm.justice.fr;webtrotter.sfr.fr;webconf.numerique.gouv.fr;lodam-test.conseil-superieur-magistrature.fr;ged.enm.justice.fr;conf.visio.justice.gouv.fr;visio.justice.gouv.fr"
+
+# For curl
+export HTTP_PROXY="http://rie-proxy.justice.gouv.fr:8080/"
+export HTTPS_PROXY="http://rie-proxy.justice.gouv.fr:8080/"
+export FTP_PROXY="http://rie-proxy.justice.gouv.fr:8080/"
+export no_proxy="127.0.0.1,localhost,*.ac*.justice.fr;*.ac.justice.fr;*.ader.gouv.fr;*.ader.senat.fr;*.amalfi.fr;*.babylon.justice.gouv.fr;*.ca-*.justice.fr;*.cour-de-cassation.justice.fr;*.dom*.justice.fr;*.drsp*.justice.fr;*.ij.justice.gouv.fr;*.intranet-cassation.justice.fr;*.intranet.justice.fr;*.intranet.justice.gouv.fr;*.mj.fr;*.registre.justice.fr;*.rie.gouv.fr;*.symcb.com;*.testa.eu;*.thawte.com;10.*;100.65.80.3;127.0.0.1;140.*;150.*;aone-enm-bdx.enm.justice.fr;atlas.justice.gouv.fr;autodiscover.*.fr;babylon.justice.gouv.fr;cour-de-cassation.justice.fr;csm-lodam-preprod.sdv.fr;epahisto.enm.justice.fr;epaprod.enm.justice.fr;fraisdemission.enm.justice.fr;gbprod.enm.justice.fr;gbtest.enm.justice.fr;gedapc-enm.enm.justice.fr;glpi.enm.justice.fr;helpdesk-enm.enm.justice.fr;iisadmpwd.enm.justice.fr;intranet-prod.conseil-superieur-magistrature.fr;intranet.conseil-superieur-magistrature.fr;intranet.justice.gouv.fr;livretpedagogique.enm.justice.fr;localhost;lodam.conseil-superieur-magistrature.fr;nomade-mj.sfr-sh.fr;ocsp.thawte.com;openportal.enm.justice.fr;portail-ofl.enm.justice.fr;svr-ov-crl.thawte.com;virtualia-enm.enm.justice.fr;vubis-enm.enm.justice.fr;webtrotter.sfr.fr;webconf.numerique.gouv.fr;lodam-test.conseil-superieur-magistrature.fr;ged.enm.justice.fr;conf.visio.justice.gouv.fr;visio.justice.gouv.fr"
+EOF
+chmod +x /etc/profile.d/proxy.sh
+cat <<EOF >/root/.wgetrc
+use_proxy = on
+http_proxy= http://rie-proxy.justice.gouv.fr:8080/
+https_proxy= http://rie-proxy.justice.gouv.fr:8080/
+ftp_proxy= http://rie-proxy.justice.gouv.fr:8080/
+EOF
   $STD apt-get update
   $STD apt-get -o Dpkg::Options::="--force-confold" -y dist-upgrade
   rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
