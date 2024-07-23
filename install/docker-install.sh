@@ -49,7 +49,7 @@ cat <<EOF >/etc/systemd/system/docker.service.d/http-proxy.conf
 [Service]
 Environment="HTTP_PROXY=http://rie-proxy.justice.gouv.fr:8080"
 Environment="HTTPS_PROXY=http://rie-proxy.justice.gouv.fr:8080"
-Environment="NO_PROXY=127.0.0.1,localhost,*.ac*.justice.fr;*.ac.justice.fr;*.ader.gouv.fr;*.ader.senat.fr;*.amalfi.fr,127.0.0.0/8,10.0.0.0/8localhost,127.0.0.1,docker-registry.example.com,.corp"
+Environment="NO_PROXY=127.0.0.1,localhost,*.ac*.justice.fr;*.ac.justice.fr;*.ader.gouv.fr;*.ader.senat.fr;*.amalfi.fr,127.0.0.0/8,10.0.0.0/8"
 EOF
 systemctl daemon-reload
 systemctl stop docker
