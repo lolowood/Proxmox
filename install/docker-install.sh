@@ -35,11 +35,24 @@ mkdir -p $(dirname $DOCKER_CONFIG_PATH)
 $STD sh <(curl -sSL https://get.docker.com)
 cat <<EOF >/etc/docker/daemon.json
 {
-  "proxies": {
-    "http-proxy": "http://rie-proxy.justice.gouv.fr:8080",
-    "https-proxy": "http://rie-proxy.justice.gouv.fr:8080",
-    "no-proxy": "127.0.0.1,localhost,*.ac*.justice.fr;*.ac.justice.fr;*.ader.gouv.fr;*.ader.senat.fr;*.amalfi.fr,127.0.0.0/8,10.0.0.0/8"
-  }
+ "proxies": {
+   "default": {
+     "httpProxy": "http://rie-proxy.justice.gouv.fr:8080",
+     "httpsProxy": "http://rie-proxy.justice.gouv.fr:8080",
+     "noProxy": "127.0.0.1,localhost,*.dom*.justice.fr,*.drsp*.justice.fr,*.intranet.justice.fr,*.intranet.justice.gouv.fr,*.rie.gouv.fr,10.*,140.*,150.*,intranet.justice.gouv.fr"
+   }
+ }
+}
+EOF
+cat <<EOF >/root/.docker/daemon.json
+{
+ "proxies": {
+   "default": {
+     "httpProxy": "http://rie-proxy.justice.gouv.fr:8080",
+     "httpsProxy": "http://rie-proxy.justice.gouv.fr:8080",
+     "noProxy": "127.0.0.1,localhost,*.dom*.justice.fr,*.drsp*.justice.fr,*.intranet.justice.fr,*.intranet.justice.gouv.fr,*.rie.gouv.fr,10.*,140.*,150.*,intranet.justice.gouv.fr"
+   }
+ }
 }
 EOF
 systemctl stop docker
