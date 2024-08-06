@@ -40,15 +40,7 @@ compactbutton=white,black
 ###############################################################################
 
 function check_connection() {
-        TIMEOUT=$1
-
-        while [ $TIMEOUT -gt 0 ]; do
-                ping -c 1 -W 2 10.137.0.252 2>&1 >/dev/null && return 0
-                sleep 1
-                TIMEOUT=$((TIMEOUT-1))
-        done
-
-        return 1
+        
 }
 
 function usage() {
