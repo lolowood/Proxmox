@@ -102,6 +102,7 @@ export HTTP_PROXY="http://rie-proxy.justice.gouv.fr:8080/"
 export HTTPS_PROXY="http://rie-proxy.justice.gouv.fr:8080/"
 export FTP_PROXY="http://rie-proxy.justice.gouv.fr:8080/"
 export NO_PROXY="127.0.0.1,localhost,*.ac*.justice.fr,*.ac.justice.fr,*.ader.gouv.fr,*.dom*.justice.fr,*.drsp*.justice.fr,*.intranet.justice.fr,*.intranet.justice.gouv.fr,*.registre.justice.fr,*.rie.gouv.fr,10.*,100.65.80.3,140.*,150.*,intranet.justice.gouv.fr"EOF
+EOF
 chmod +x /etc/profile.d/proxy.sh
 cat <<EOF >/root/.wgetrc
 use_proxy = on
