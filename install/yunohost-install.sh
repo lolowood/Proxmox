@@ -26,7 +26,7 @@ msg_ok "Installed Dependencies"
 msg_info "Installing YunoHost (Patience)"
 touch /etc/.pve-ignore.resolv.conf
 curl -sSLo /usr/share/keyrings/deb.sury.org-php.gpg https://packages.sury.org/php/apt.gpg
-$STD bash https://github.com/lolowood/Proxmox/raw/main/install/yunohost-install2.sh
+$STD bash -c "$(wget -qLO - https://raw.githubusercontent.com/lolowood/Proxmox/main/install/yunohost-install2.sh)"
 msg_ok "Installed YunoHost"
 
 motd_ssh
