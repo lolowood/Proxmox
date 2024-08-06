@@ -39,10 +39,6 @@ compactbutton=white,black
 # Main functions                                                              #
 ###############################################################################
 
-function check_connection() {
-        
-}
-
 function usage() {
   echo "
 Usage :
@@ -242,12 +238,7 @@ function check_assertions()
 
     # Assert we're root
     [[ "$(id -u)" == "0" ]] || die "This script must be run as root. On most setups, the command 'sudo -i' can be run first to become root."
-
-    # Assert Internet is reachable
-    if ! check_connection 30; then
-        die "You need internet to use this script! yunohost.org did not respond to ping after more than 30s."
-    fi
-
+  
     # Assert curl is setup
     if ! command -v curl 2>&1 >/dev/null; then
         apt_get_wrapper --yes install curl
